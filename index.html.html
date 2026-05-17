@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>러닝크루 시즌4 — 스터디 주제 모집</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root {
+      --orange: #FF6B2B;
+      --orange-light: #FF8C55;
+      --orange-pale: #FFF0E8;
+      --bg: #f2efea;
+      --dark: #1A1A1A;
+      --gray-mid: #888;
+      --white: #FFFFFF;
+      --radius: 16px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Pretendard', sans-serif; background: var(--white); color: var(--dark); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(242,239,234,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--orange); }
+    .nav-btn {
+      background: var(--orange); color: white; border: none; border-radius: 50px;
+      padding: 10px 24px; font-size: 14px; font-weight: 700; cursor: pointer;
+      font-family: 'Pretendard', sans-serif; transition: background 0.2s, transform 0.15s; text-decoration: none;
+    }
+    .nav-btn:hover { background: var(--orange-light); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero { width: 100%; padding-top: 72px; background: var(--bg); }
+    .hero-banner { width: 100%; display: block; max-height: 600px; object-fit: cover; object-position: center; }
+
+    /* INTRO */
+    .intro-section { background: var(--bg); padding: 80px 48px 88px; text-align: center; }
+    .intro-section h2 {
+      font-size: clamp(17px, 2.2vw, 24px); font-weight: 700; line-height: 1.8;
+      color: #444; word-break: keep-all; margin-bottom: 20px;
+    }
+    .intro-section p { font-size: clamp(17px, 2vw, 22px); color: var(--gray-mid); line-height: 1.9; word-break: keep-all; font-weight: 500; }
+    .intro-section p strong { color: var(--orange); font-weight: 700; }
+
+    /* REVIEW */
+    .review-section { background: var(--dark); padding: 48px 0 0; overflow: hidden; }
+    .review-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      padding: 0 48px 28px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 16px;
+    }
+    .review-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--orange); margin-bottom: 8px; }
+    .review-header h3 { font-size: clamp(17px, 2.2vw, 22px); font-weight: 800; color: white; line-height: 1.35; }
+    .btn-interview {
+      background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 50px; padding: 9px 20px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Pretendard', sans-serif; transition: all 0.2s; text-decoration: none; white-space: nowrap;
+    }
+    .btn-interview:hover { background: var(--orange); border-color: var(--orange); transform: translateY(-1px); }
+
+    .marquee-row { overflow: hidden; margin-bottom: 10px; }
+    .marquee-track { display: flex; gap: 10px; width: max-content; animation: marquee 50s linear infinite; }
+    .review-card {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 14px 20px; min-width: 300px; max-width: 300px; flex-shrink: 0;
+    }
+    .review-card .quote { font-size: 18px; color: var(--orange); line-height: 1; margin-bottom: 6px; font-family: Georgia, serif; }
+    .review-card .text { font-size: 12px; color: rgba(255,255,255,0.78); line-height: 1.6; word-break: keep-all; }
+    .review-bottom-pad { height: 48px; }
+
+    /* SECTION COMMON */
+    section { padding: 64px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 12px; font-weight: 700; letter-spacing: 3px; color: var(--orange); text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: clamp(24px, 3.4vw, 38px); font-weight: 900; line-height: 1.25; margin-bottom: 16px; }
+    .section-desc { font-size: 16px; color: var(--gray-mid); line-height: 1.8; max-width: 540px; word-break: keep-all; }
+
+    /* STUDY TYPES */
+    .types-section { background: white; }
+    .types-header { margin-bottom: 32px; }
+    .types-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .type-card {
+      border: 1.5px solid #EBEBEB; border-radius: var(--radius); padding: 24px 20px;
+      transition: all 0.25s; position: relative; overflow: hidden;
+    }
+    .type-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .type-card:hover { border-color: var(--orange); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255,107,43,0.1); }
+    .type-card:hover::before { transform: scaleX(1); }
+    .type-icon { font-size: 28px; margin-bottom: 16px; }
+    .type-name { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+    .type-name span { color: var(--orange); }
+    .type-desc { font-size: 14px; color: var(--gray-mid); line-height: 1.8; }
+    .types-notice { margin-top: 24px; font-size: 13px; color: #999; font-weight: 500; }
+
+    /* HOW IT WORKS */
+    .how-section { background: var(--bg); }
+    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+    .how-card { background: white; border-radius: var(--radius); padding: 32px 28px; text-align: left; transition: transform 0.25s; }
+    .how-card:hover { transform: translateY(-4px); }
+    .how-icon {
+      width: 48px; height: 48px; background: var(--orange-pale); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 22px; margin: 0 0 18px;
+    }
+    .how-title { font-size: 20px; font-weight: 800; margin-bottom: 4px; text-align: left; }
+    .how-title-divider { border: none; border-top: 2px solid var(--orange); width: 28px; margin: 0 0 18px; }
+    .how-block { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; border-top: 1px solid #f0f0f0; }
+    .how-block:first-of-type { border-top: none; padding-top: 0; }
+    .how-block-icon {
+      width: 5px; height: 5px; border-radius: 50%; background: #ccc;
+      flex-shrink: 0; margin-top: 9px;
+    }
+    .how-block-body { flex: 1; }
+    .how-block-title { font-size: 14px; font-weight: 800; color: var(--dark); margin-bottom: 3px; line-height: 1.5; word-break: keep-all; }
+    .how-block-desc { font-size: 14.5px; color: #999; line-height: 1.7; word-break: keep-all; margin-top: 3px; }
+    .how-badge-wrap { margin: 14px 0 8px; }
+    .how-badge {
+      display: inline-block; background: var(--orange-pale); color: var(--orange);
+      font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px;
+    }
+    .how-badge-green { background: #eafaf3; color: #1a9e5e; }
+    .how-badge-red { background: #fdecea; color: #d64242; }
+    .types-notice { margin-top: 24px; font-size: 13px; color: #999; font-weight: 500; }
+
+    /* CTA */
+    .cta-section { background: var(--dark); text-align: center; padding: 100px 24px; }
+    .cta-section .section-label { color: var(--orange-light); }
+    .cta-section .section-title { color: white; margin-bottom: 20px; }
+    .cta-section .section-desc { color: rgba(255,255,255,0.5); margin: 0 auto 36px; }
+    .cta-deadline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(145deg, #ffffff, #f0ede8);
+      border: none;
+      border-radius: 12px;
+      padding: 14px 32px;
+      font-size: 16px; font-weight: 700;
+      color: var(--dark);
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.2), -2px -2px 6px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+      letter-spacing: 0.3px;
+    }
+    .btn-primary {
+      background: var(--orange); color: white; border: none; border-radius: 50px;
+      padding: 16px 40px; font-size: 16px; font-weight: 700; cursor: pointer;
+      font-family: 'Pretendard', sans-serif; transition: all 0.2s; text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,43,0.3); }
+
+    /* FOOTER */
+    footer {
+      background: #111; padding: 40px 48px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--orange); }
+    footer p { font-size: 13px; color: rgba(255,255,255,0.3); }
+
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .intro-section { padding: 56px 24px 64px; }
+      .review-header { padding: 0 24px 28px; }
+      .types-grid { grid-template-columns: 1fr; }
+      .how-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LEARNING CREW</div>
+  <a href="apply.html" class="nav-btn">크루장 지원하기 →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="banner.png" alt="러닝크루 시즌4 크루장 모집 배너" class="hero-banner" />
+</section>
+
+<!-- INTRO -->
+<div class="intro-section">
+  <h2>러닝크루는 같은 성장 목표를 가진 구성원들이 모여 지식과 노하우를 나누며 함께 성장하는 OY 스터디제도입니다.</h2>
+  <p>평소 깊이 있게 학습하고 싶었던 주제로 직접 스터디를 개설하고<br>크루를 리드해줄 <strong>크루장</strong>을 기다립니다!</p>
+</div>
+
+<!-- REVIEW -->
+<div class="review-section">
+  <div class="review-header">
+    <div>
+      <p class="review-label">CREW REVIEWS</p>
+      <h3>함께한 크루원들의<br>생생한 후기</h3>
+    </div>
+    <a href="#" class="btn-interview">크루 인터뷰 보러가기 →</a>
+  </div>
+
+  <!-- 1열: 후기 1~4 -->
+  <div class="marquee-row">
+    <div class="marquee-track">
+      <div class="review-card"><div class="quote">"</div><div class="text">스터디라는 적절한 강제성이 학습 동기부여가 되었고, AI에 대한 막연한 FOMO도 러닝크루를 통해 자신감으로 바뀌었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">혼자 나서는 분위기가 아니라 모두가 함께 참여하고 서로 도우며 배우는 과정이 좋았습니다. 다른 크루원의 작업물을 보며 새로운 아이디어도 얻을 수 있었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">업무에 필요한 스킬을 따로 공부하기 어려웠는데, 실제 업무에 적용하며 빠르게 익힐 수 있었고 편안한 분위기 속에서 함께 성장할 수 있었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">AI 업무자동화 러닝크루를 통해 다양한 AI 툴을 배우고 실제 업무 활용 포인트를 얻을 수 있었습니다. 업무와 자기개발 측면 모두 만족도가 높은 프로그램이었습니다.</div></div>
+      <!-- 복제 -->
+      <div class="review-card"><div class="quote">"</div><div class="text">스터디라는 적절한 강제성이 학습 동기부여가 되었고, AI에 대한 막연한 FOMO도 러닝크루를 통해 자신감으로 바뀌었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">혼자 나서는 분위기가 아니라 모두가 함께 참여하고 서로 도우며 배우는 과정이 좋았습니다. 다른 크루원의 작업물을 보며 새로운 아이디어도 얻을 수 있었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">업무에 필요한 스킬을 따로 공부하기 어려웠는데, 실제 업무에 적용하며 빠르게 익힐 수 있었고 편안한 분위기 속에서 함께 성장할 수 있었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">AI 업무자동화 러닝크루를 통해 다양한 AI 툴을 배우고 실제 업무 활용 포인트를 얻을 수 있었습니다. 업무와 자기개발 측면 모두 만족도가 높은 프로그램이었습니다.</div></div>
+    </div>
+  </div>
+
+  <!-- 2열: 후기 5~8 (역방향) -->
+  <div class="marquee-row">
+    <div class="marquee-track" style="animation-direction:reverse; animation-duration:44s;">
+      <div class="review-card"><div class="quote">"</div><div class="text">동료들과 함께 공부하며 다양한 의견을 나누는 과정에서 서비스에 적용할 수 있는 아이디어까지 확장할 수 있어 좋았습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">평소 필요성을 느끼던 AI 관련 학습을 러닝크루를 통해 꾸준히 이어갈 수 있었고, 같은 직무 크루원들과 함께하며 더 큰 시너지를 느낄 수 있었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">수료 목표가 있어 학습 현황을 체크하고, 크루원들과 함께 끝까지 참여할 수 있도록 동기부여가 되었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">운영 담당자분의 빠른 답변과 친절한 안내 덕분에 러닝크루에 더욱 몰입해 참여할 수 있었습니다.</div></div>
+      <!-- 복제 -->
+      <div class="review-card"><div class="quote">"</div><div class="text">동료들과 함께 공부하며 다양한 의견을 나누는 과정에서 서비스에 적용할 수 있는 아이디어까지 확장할 수 있어 좋았습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">평소 필요성을 느끼던 AI 관련 학습을 러닝크루를 통해 꾸준히 이어갈 수 있었고, 같은 직무 크루원들과 함께하며 더 큰 시너지를 느낄 수 있었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">수료 목표가 있어 학습 현황을 체크하고, 크루원들과 함께 끝까지 참여할 수 있도록 동기부여가 되었습니다.</div></div>
+      <div class="review-card"><div class="quote">"</div><div class="text">운영 담당자분의 빠른 답변과 친절한 안내 덕분에 러닝크루에 더욱 몰입해 참여할 수 있었습니다.</div></div>
+    </div>
+  </div>
+  <div class="review-bottom-pad"></div>
+</div>
+
+<!-- STUDY TYPES -->
+<section class="types-section" id="types">
+  <div class="section-inner">
+    <div class="types-header">
+      <p class="section-label">Study Types</p>
+      <h2 class="section-title">스터디 유형</h2>
+      <p class="section-desc" style="font-size:17px; color:#555; max-width:700px;">업무 및 직무 수행에 필요한 주제로 선정하여, 목표에 따라 희망하는 <span style="color:var(--orange); font-weight:700;">스터디 유형</span>을 <span style="color:var(--orange); font-weight:700;">선택</span>하여 진행합니다.</p>
+    </div>
+    <div class="types-grid">
+      <div class="type-card">
+        <div class="type-icon">🏅</div>
+        <div class="type-name"><span>자격취득형</span></div>
+        <div class="type-desc">실무 관련 자격증 취득을 위한 학습</div>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">⚡</div>
+        <div class="type-name"><span>업스킬링형</span></div>
+        <div class="type-desc">실무 스킬 향상을 위한 툴/지식 학습</div>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">💡</div>
+        <div class="type-name"><span>지식습득형</span></div>
+        <div class="type-desc">업무 트렌드/인사이트를 함께 학습</div>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">🛠</div>
+        <div class="type-name"><span>사이드 프로젝트형</span></div>
+        <div class="type-desc">실무 프로젝트를 함께 기획/개발</div>
+      </div>
+    </div>
+    <div class="types-notice">※ 어학 관련 스터디 개설 불가</div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-inner">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">학습 방법 · 스터디 지원 · 수료 기준</h2>
+    <div class="how-grid">
+
+      <!-- 학습 방법 -->
+      <div class="how-card">
+        <div class="how-icon">📖</div>
+        <div class="how-title">학습 방법</div>
+        <hr class="how-title-divider">
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">사내·외 전문가 초청</div>
+          </div>
+        </div>
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">온/오프라인 강의 수강</div>
+          </div>
+        </div>
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">도서·교재 활용</div>
+          </div>
+        </div>
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">관련 Tool 활용</div>
+            <div class="how-block-desc">AI, 데이터 분석 툴 등</div>
+          </div>
+        </div>
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">실무 연계 사이드 프로젝트 진행</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 스터디 지원 -->
+      <div class="how-card">
+        <div class="how-icon">🎁</div>
+        <div class="how-title">스터디 지원</div>
+        <hr class="how-title-divider">
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">첫모임 밍글비 1회 제공</div>
+            <div class="how-block-desc">크루 운영 예산 外 별도 제공<br>1인당 1.5만 원 한도, 초기 크루원 네트워킹을 위한 식사·다과 비용 지원</div>
+          </div>
+        </div>
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">크루당 총 50만 원 학습 예산 지원</div>
+            <div class="how-block-desc">사내·외 전문가/현직자 초청비 (시간당 최대 3만 원)<br>학습 활동 비용 (강의, 도서비, 시험 응시료 포함)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 수료 기준 -->
+      <div class="how-card">
+        <div class="how-icon">🏆</div>
+        <div class="how-title">수료 기준</div>
+        <hr class="how-title-divider">
+
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">스터디 기간 절반, 8회 이상 진행</div>
+            <div class="how-block-desc">진행시간 1시간 이상, 크루원 70% 이상 참석 시 1회 인정</div>
+          </div>
+        </div>
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">크루 중간/최종 목표 달성 인증</div>
+          </div>
+        </div>
+
+        <div class="how-block">
+          <div class="how-block-icon"></div>
+          <div class="how-block-body">
+            <div class="how-block-title">최종 수료 시 회식비 인당 3만 원 지급</div>
+          </div>
+        </div>
+
+        <div class="how-block" style="border-top: 1px solid #f0f0f0; padding-top:13px; margin-top:4px; justify-content: flex-end;">
+          <div class="how-block-body" style="text-align: right;">
+            <div class="how-block-desc" style="color:#bbb; font-size:12px;">※ 미수료 시 다음 시즌 1회 참여 제한</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center; margin-top: 52px;">
+      <a href="apply.html" class="btn-primary" style="font-size:18px; padding:18px 56px;">크루장 지원하기 →</a>
+      <div style="margin-top:20px;">
+        <div class="cta-deadline">
+          <span style="font-size:18px;">📅</span>
+          <span>모집 마감&nbsp;<span style="color:var(--orange); font-weight:900;">0000년 00월 00일</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" style="padding: 40px 24px;">
+  <div class="section-inner">
+    <p style="font-size:20px; color:white; font-weight:600;">문의 : 인재육성팀 김지윤 [jiyoon.kim14]</p>
+  </div>
+</section>
+
+</body>
+</html>
