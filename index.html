@@ -94,10 +94,7 @@
       background: #ffffff;
       box-shadow: 4px 4px 10px rgba(0,0,0,0.12), -2px -2px 6px rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,0.8);
     }
-    .type-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
-    }
+    .type-card::before { display: none; }
     .type-card:hover {
       transform: translateY(-4px);
       box-shadow: 6px 6px 16px rgba(0,0,0,0.15), -2px -2px 8px rgba(255,255,255,0.9);
@@ -136,7 +133,7 @@
     }
     .how-badge-green { background: #eafaf3; color: #1a9e5e; }
     .how-badge-red { background: #fdecea; color: #d64242; }
-    .types-notice { margin-top: 24px; font-size: 13px; color: #999; font-weight: 500; }
+    .types-notice { margin-top: 24px; font-size: 19px; color: #999; font-weight: 500; }
 
     /* CTA */
     .cta-section { background: var(--dark); text-align: center; padding: 100px 24px; }
@@ -234,7 +231,7 @@
 
   <!-- 맨 아래 인터뷰 버튼 -->
   <div style="text-align:center; padding: 32px 0 48px;">
-    <a href="#" class="btn-interview">크루 인터뷰 보러가기 →</a>
+    <a href="http://cj.cj.net/PT/PortalBuilder/Framework/contents_link.aspx?CONTENTS_ID=EPCT4153&q=fb93846d4e5f3ac334cd08d275a35c78d951805c201294b5d8902022f0c491d45d40debfeb2b8993" target="_blank" class="btn-interview">크루 인터뷰 보러가기 →</a>
   </div>
 </div>
 
@@ -305,7 +302,7 @@
         <div class="how-block">
           <div class="how-block-icon"></div>
           <div class="how-block-body">
-            <div class="how-block-title">관련 Tool 활용</div>
+            <div class="how-block-title">업무 Tool 활용 실습</div>
             <div class="how-block-desc">AI, 데이터 분석 툴 등</div>
           </div>
         </div>
@@ -326,7 +323,7 @@
           <div class="how-block-icon"></div>
           <div class="how-block-body">
             <div class="how-block-title">첫모임 밍글비 1회 제공</div>
-            <div class="how-block-desc">크루 운영 예산 外 별도 제공<br>1인당 1.5만 원 한도, 초기 크루원 네트워킹을 위한 식사·다과 비용 지원</div>
+            <div class="how-block-desc">크루 운영 예산 외 별도 제공<br>1인당 1.5만 원 한도, 초기 크루원 네트워킹을 위한 식사·다과 비용 지원</div>
           </div>
         </div>
         <div class="how-block">
@@ -358,9 +355,9 @@
           </div>
         </div>
 
-        <div class="how-block">
-          <div class="how-block-icon"></div>
+        <div class="how-block" style="border-top: 1px solid #f0f0f0; padding-left: 17px;">
           <div class="how-block-body">
+            <span style="display:inline-block; background:#eafaf3; color:#1a9e5e; font-size:11px; font-weight:700; padding:3px 10px; border-radius:50px; margin-bottom:6px;">수료 혜택</span>
             <div class="how-block-title">최종 수료 시 회식비 인당 3만 원 지급</div>
           </div>
         </div>
