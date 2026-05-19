@@ -13,206 +13,111 @@
       --bg: #f2efea;
       --dark: #1A1A1A;
       --gray-mid: #888;
-      --white: #fff;
       --radius: 12px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--dark); }
 
-    /* LOGIN */
-    .login-wrap {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    }
-    .login-box {
-      background: white; border-radius: 20px; padding: 48px 40px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center;
-    }
-    .login-box h1 { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
-    .login-box p { font-size: 14px; color: var(--gray-mid); margin-bottom: 28px; }
-    .login-box input {
-      width: 100%; padding: 14px 16px; border: 1.5px solid #EBEBEB; border-radius: 10px;
-      font-size: 16px; font-family: 'Pretendard', sans-serif; margin-bottom: 14px;
-      outline: none; text-align: center; letter-spacing: 6px;
-    }
-    .login-box input:focus { border-color: var(--orange); }
-    .login-btn {
-      width: 100%; padding: 14px; background: var(--orange); color: white;
-      border: none; border-radius: 50px; font-size: 15px; font-weight: 700;
-      cursor: pointer; font-family: 'Pretendard', sans-serif; transition: all 0.2s;
-    }
-    .login-btn:hover { background: var(--orange-light); }
-    .login-error { color: #e53935; font-size: 13px; margin-top: 10px; display: none; }
-
-    /* ADMIN */
-    .admin-wrap { display: none; }
-
-    /* NAV */
     nav {
       background: var(--dark); padding: 16px 40px;
       display: flex; align-items: center; justify-content: space-between;
       position: sticky; top: 0; z-index: 100;
     }
-    .nav-logo { color: var(--orange); font-size: 18px; font-weight: 900; letter-spacing: 1px; }
+    .nav-logo { color: var(--orange); font-size: 18px; font-weight: 900; }
     .nav-right { display: flex; align-items: center; gap: 16px; }
     .nav-count { font-size: 13px; color: rgba(255,255,255,0.5); }
     .nav-export {
       background: var(--orange); color: white; border: none; border-radius: 50px;
       padding: 8px 20px; font-size: 13px; font-weight: 700; cursor: pointer;
-      font-family: 'Pretendard', sans-serif; transition: all 0.2s;
+      font-family: 'Pretendard', sans-serif;
     }
-    .nav-export:hover { background: var(--orange-light); }
 
-    /* MAIN */
     .main { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
     .page-title { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
     .page-desc { font-size: 14px; color: var(--gray-mid); margin-bottom: 32px; }
 
-    /* FILTER */
-    .filter-bar {
-      display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap;
-    }
+    .filter-bar { display: flex; gap: 10px; margin-bottom: 24px; }
     .filter-btn {
       padding: 7px 18px; border-radius: 50px; border: 1.5px solid #ddd;
       font-size: 13px; font-weight: 600; cursor: pointer; background: white;
-      font-family: 'Pretendard', sans-serif; transition: all 0.2s;
+      font-family: 'Pretendard', sans-serif;
     }
     .filter-btn.active { background: var(--orange); color: white; border-color: var(--orange); }
 
-    /* TABLE */
-    .table-wrap { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-    table { width: 100%; border-collapse: collapse; }
+    .table-wrap { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 900px; }
     thead { background: var(--dark); }
     thead th { color: white; font-size: 12px; font-weight: 700; padding: 14px 16px; text-align: left; white-space: nowrap; }
-    tbody tr { border-bottom: 1px solid #f0f0f0; transition: background 0.15s; }
+    tbody tr { border-bottom: 1px solid #f0f0f0; }
     tbody tr:hover { background: #fafafa; }
-    tbody td { padding: 14px 16px; font-size: 13px; color: var(--dark); vertical-align: middle; }
+    tbody td { padding: 14px 16px; font-size: 13px; vertical-align: middle; }
     .td-date { color: var(--gray-mid); font-size: 12px; white-space: nowrap; }
     .td-name { font-weight: 700; }
-    .td-type { }
-    .type-chip {
-      display: inline-block; padding: 3px 10px; border-radius: 50px;
-      font-size: 11px; font-weight: 700; background: var(--orange-pale); color: var(--orange);
-    }
-    .status-chip {
-      display: inline-block; padding: 4px 12px; border-radius: 50px;
-      font-size: 11px; font-weight: 700;
-    }
+    .type-chip { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 11px; font-weight: 700; background: var(--orange-pale); color: var(--orange); }
+    .status-chip { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: 700; }
     .status-pending { background: #f5f5f5; color: #888; }
     .status-approved { background: #eafaf3; color: #1a9e5e; }
 
-    /* ACTION BTNS */
     .action-btns { display: flex; gap: 6px; }
-    .btn-view {
-      padding: 5px 12px; border-radius: 6px; border: 1px solid #ddd;
-      font-size: 12px; font-weight: 600; cursor: pointer; background: white;
-      font-family: 'Pretendard', sans-serif; transition: all 0.2s;
-    }
+    .btn-view { padding: 5px 12px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; font-weight: 600; cursor: pointer; background: white; font-family: 'Pretendard', sans-serif; }
     .btn-view:hover { border-color: var(--orange); color: var(--orange); }
-    .btn-approve {
-      padding: 5px 12px; border-radius: 6px; border: none;
-      font-size: 12px; font-weight: 700; cursor: pointer;
-      font-family: 'Pretendard', sans-serif; transition: all 0.2s;
-      background: var(--orange); color: white;
-    }
-    .btn-approve:hover { background: var(--orange-light); }
-    .btn-approved {
-      padding: 5px 12px; border-radius: 6px; border: 1px solid #1a9e5e;
-      font-size: 12px; font-weight: 700; cursor: default;
-      background: #eafaf3; color: #1a9e5e;
-    }
+    .btn-approve { padding: 5px 12px; border-radius: 6px; border: none; font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Pretendard', sans-serif; background: var(--orange); color: white; }
+    .btn-approved { padding: 5px 12px; border-radius: 6px; border: 1px solid #1a9e5e; font-size: 12px; font-weight: 700; background: #eafaf3; color: #1a9e5e; cursor: default; }
 
-    /* MODAL */
-    .modal-bg {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center;
-    }
+    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; }
     .modal-bg.open { display: flex; }
-    .modal {
-      background: white; border-radius: 20px; padding: 36px 40px;
-      max-width: 700px; width: 90%; max-height: 85vh; overflow-y: auto;
-      position: relative;
-    }
-    .modal-close {
-      position: absolute; top: 16px; right: 20px;
-      font-size: 22px; cursor: pointer; color: var(--gray-mid); background: none; border: none;
-    }
+    .modal { background: white; border-radius: 20px; padding: 36px 40px; max-width: 700px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; }
+    .modal-close { position: absolute; top: 16px; right: 20px; font-size: 22px; cursor: pointer; color: var(--gray-mid); background: none; border: none; }
     .modal-title { font-size: 20px; font-weight: 900; margin-bottom: 24px; }
-    .modal-field { margin-bottom: 18px; }
-    .modal-label { font-size: 12px; font-weight: 700; color: var(--orange); margin-bottom: 6px; letter-spacing: 1px; }
-    .modal-input {
-      width: 100%; padding: 10px 14px; border: 1.5px solid #EBEBEB; border-radius: 8px;
-      font-size: 14px; font-family: 'Pretendard', sans-serif; outline: none;
-      transition: border-color 0.2s; resize: vertical;
-    }
+    .modal-field { margin-bottom: 16px; }
+    .modal-label { font-size: 12px; font-weight: 700; color: var(--orange); margin-bottom: 6px; letter-spacing: 1px; display: block; }
+    .modal-input { width: 100%; padding: 10px 14px; border: 1.5px solid #EBEBEB; border-radius: 8px; font-size: 14px; font-family: 'Pretendard', sans-serif; outline: none; resize: vertical; }
     .modal-input:focus { border-color: var(--orange); }
-    .modal-save {
-      width: 100%; padding: 14px; background: var(--orange); color: white;
-      border: none; border-radius: 50px; font-size: 15px; font-weight: 700;
-      cursor: pointer; font-family: 'Pretendard', sans-serif; margin-top: 8px;
-      transition: all 0.2s;
-    }
-    .modal-save:hover { background: var(--orange-light); }
+    .modal-save { width: 100%; padding: 14px; background: var(--orange); color: white; border: none; border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Pretendard', sans-serif; margin-top: 8px; }
 
     .empty-state { text-align: center; padding: 60px 24px; color: var(--gray-mid); font-size: 15px; }
   </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div class="login-wrap" id="loginWrap">
-  <div class="login-box">
-    <h1>🔐 관리자 로그인</h1>
-    <p>러닝크루 관리자 페이지입니다</p>
-    <input type="password" id="pwInput" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter') checkPw()" />
-    <button class="login-btn" onclick="checkPw()">로그인</button>
-    <div class="login-error" id="loginError">비밀번호가 올바르지 않습니다.</div>
+<nav>
+  <div class="nav-logo">LEARNING CREW 관리자</div>
+  <div class="nav-right">
+    <span class="nav-count" id="navCount">총 0건</span>
+    <button class="nav-export" onclick="exportCSV()">CSV 다운로드</button>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="page-title">크루장 신청 현황</div>
+  <div class="page-desc">신청일시 기준 최신순</div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterData('전체', this)">전체</button>
+    <button class="filter-btn" onclick="filterData('대기중', this)">대기중</button>
+    <button class="filter-btn" onclick="filterData('승인완료', this)">승인완료</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>신청일시</th>
+          <th>이름</th>
+          <th>부서</th>
+          <th>사번</th>
+          <th>크루명</th>
+          <th>유형</th>
+          <th>총정원</th>
+          <th>상태</th>
+          <th>관리</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="9" class="empty-state">데이터를 불러오는 중...</td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-<!-- ADMIN -->
-<div class="admin-wrap" id="adminWrap">
-  <nav>
-    <div class="nav-logo">LEARNING CREW 관리자</div>
-    <div class="nav-right">
-      <span class="nav-count" id="navCount">총 0건</span>
-      <button class="nav-export" onclick="exportCSV()">CSV 다운로드</button>
-    </div>
-  </nav>
-
-  <div class="main">
-    <div class="page-title">크루장 신청 현황</div>
-    <div class="page-desc" id="pageDesc">신청일시 기준 최신순</div>
-
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterData('전체', this)">전체</button>
-      <button class="filter-btn" onclick="filterData('대기중', this)">대기중</button>
-      <button class="filter-btn" onclick="filterData('승인완료', this)">승인완료</button>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>신청일시</th>
-            <th>이름</th>
-            <th>부서</th>
-            <th>사번</th>
-            <th>크루명</th>
-            <th>유형</th>
-            <th>모집인원</th>
-            <th>상태</th>
-            <th>관리</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-          <tr><td colspan="9" class="empty-state">데이터를 불러오는 중...</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL -->
 <div class="modal-bg" id="modalBg">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -222,22 +127,9 @@
   </div>
 </div>
 
-<script>
-  function checkPw() {
-    const pw = document.getElementById('pwInput').value;
-    if (pw === 'o5o9') {
-      document.getElementById('loginWrap').style.display = 'none';
-      document.getElementById('adminWrap').style.display = 'block';
-      window.dispatchEvent(new Event('adminLogin'));
-    } else {
-      document.getElementById('loginError').style.display = 'block';
-    }
-  }
-</script>
-
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, getDocs, doc, updateDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFirestore, collection, getDocs, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAdYQjs_BsPgo1PZ2TiF_sXgKIioHGYZjg",
@@ -250,150 +142,116 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
   let allData = [];
   let currentFilter = '전체';
   let currentDocId = null;
 
-  // 로그인 이벤트 수신
-  window.addEventListener('adminLogin', () => loadData());
+  const FIELDS = ['이름','부서','사번','참여여부','크루명','유형','활동기간',
+    '중간목표','최종목표','1~4주차','5~8주차','9~12주차','교보재',
+    '총정원','신규모집인원','사전구성인원','크루원요건','소개글','키워드'];
+  const TEXTAREA_FIELDS = ['중간목표','최종목표','1~4주차','5~8주차','9~12주차','크루원요건','소개글'];
 
-  // 데이터 로드
   async function loadData() {
     try {
       const q = query(collection(db, 'applications'), orderBy('신청일시', 'desc'));
-      const snapshot = await getDocs(q);
-      allData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    } catch(e) {
-      const snapshot = await getDocs(collection(db, 'applications'));
-      allData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      allData.sort((a, b) => (b.신청일시 || '').localeCompare(a.신청일시 || ''));
+      const snap = await getDocs(q);
+      allData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    } catch {
+      const snap = await getDocs(collection(db, 'applications'));
+      allData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      allData.sort((a,b) => (b.신청일시||'').localeCompare(a.신청일시||''));
     }
-    renderTable(allData);
     document.getElementById('navCount').textContent = `총 ${allData.length}건`;
+    renderTable(allData);
   }
 
-  // 테이블 렌더링
   function renderTable(data) {
     const tbody = document.getElementById('tableBody');
-    if (data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="9" class="empty-state">신청 데이터가 없습니다.</td></tr>';
-      return;
-    }
+    if (!data.length) { tbody.innerHTML = '<tr><td colspan="9" class="empty-state">신청 데이터가 없습니다.</td></tr>'; return; }
     tbody.innerHTML = data.map(d => `
       <tr>
-        <td class="td-date">${d.신청일시 || '-'}</td>
-        <td class="td-name">${d.이름 || '-'}</td>
-        <td>${d.부서 || '-'}</td>
-        <td>${d.사번 || '-'}</td>
-        <td>${d.크루명 || '-'}</td>
-        <td><span class="type-chip">${d.유형 || '-'}</span></td>
-        <td>${d.총정원 || '-'}명</td>
-        <td><span class="status-chip ${d.status === '승인완료' ? 'status-approved' : 'status-pending'}">${d.status || '대기중'}</span></td>
+        <td class="td-date">${d.신청일시||'-'}</td>
+        <td class="td-name">${d.이름||'-'}</td>
+        <td>${d.부서||'-'}</td>
+        <td>${d.사번||'-'}</td>
+        <td>${d.크루명||'-'}</td>
+        <td><span class="type-chip">${d.유형||'-'}</span></td>
+        <td>${d.총정원||'-'}명</td>
+        <td><span class="status-chip ${d.status==='승인완료'?'status-approved':'status-pending'}">${d.status||'대기중'}</span></td>
         <td>
           <div class="action-btns">
             <button class="btn-view" onclick="openModal('${d.id}')">상세/수정</button>
-            ${d.status === '승인완료'
+            ${d.status==='승인완료'
               ? `<button class="btn-approved">✓ 승인완료</button>`
-              : `<button class="btn-approve" onclick="approve('${d.id}')">승인확정</button>`
-            }
+              : `<button class="btn-approve" onclick="approve('${d.id}')">승인확정</button>`}
           </div>
         </td>
-      </tr>
-    `).join('');
+      </tr>`).join('');
   }
 
-  // 필터
   window.filterData = function(filter, btn) {
     currentFilter = filter;
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const filtered = filter === '전체' ? allData : allData.filter(d => (d.status || '대기중') === filter);
-    renderTable(filtered);
+    renderTable(filter === '전체' ? allData : allData.filter(d => (d.status||'대기중') === filter));
   };
 
-  // 승인 확정
   window.approve = async function(id) {
     if (!confirm('승인 확정하시겠어요? 크루원 모집 페이지에 게시됩니다.')) return;
-    const ref = doc(db, 'applications', id);
-    await updateDoc(ref, { status: '승인완료' });
+    await updateDoc(doc(db,'applications',id), { status: '승인완료' });
     await loadData();
-    filterData(currentFilter, document.querySelector('.filter-btn.active'));
+    document.querySelector('.filter-btn.active').click();
   };
 
-  // 모달 열기
   window.openModal = function(id) {
     currentDocId = id;
     const d = allData.find(x => x.id === id);
-    if (!d) return;
-
-    const fields = ['이름', '부서', '사번', '참여여부', '크루명', '유형', '활동기간',
-      '중간목표', '최종목표', '1~4주차', '5~8주차', '9~12주차', '교보재',
-      '총정원', '신규모집인원', '사전구성인원', '크루원요건', '소개글', '키워드'];
-
-    document.getElementById('modalFields').innerHTML = fields.map(f => `
+    document.getElementById('modalFields').innerHTML = FIELDS.map(f => `
       <div class="modal-field">
-        <div class="modal-label">${f}</div>
-        ${f === '유형' ? `
-          <select class="modal-input" id="mf-${f}">
-            <option ${d[f]==='사이드프로젝트형'?'selected':''}>사이드프로젝트형</option>
-            <option ${d[f]==='자격취득형'?'selected':''}>자격취득형</option>
-            <option ${d[f]==='지식습득형'?'selected':''}>지식습득형</option>
-            <option ${d[f]==='업스킬링형'?'selected':''}>업스킬링형</option>
-          </select>
-        ` : ['중간목표','최종목표','1~4주차','5~8주차','9~12주차','크루원요건','소개글'].includes(f) ? `
-          <textarea class="modal-input" id="mf-${f}" rows="3">${d[f] || ''}</textarea>
-        ` : `
-          <input class="modal-input" id="mf-${f}" type="text" value="${d[f] || ''}" />
-        `}
-      </div>
-    `).join('');
-
+        <label class="modal-label">${f}</label>
+        ${f === '유형' ? `<select class="modal-input" id="mf-${f}">
+          <option ${d[f]==='사이드프로젝트형'?'selected':''}>사이드프로젝트형</option>
+          <option ${d[f]==='자격취득형'?'selected':''}>자격취득형</option>
+          <option ${d[f]==='지식습득형'?'selected':''}>지식습득형</option>
+          <option ${d[f]==='업스킬링형'?'selected':''}>업스킬링형</option>
+        </select>`
+        : TEXTAREA_FIELDS.includes(f) ? `<textarea class="modal-input" id="mf-${f}" rows="3">${d[f]||''}</textarea>`
+        : `<input class="modal-input" id="mf-${f}" type="text" value="${(d[f]||'').replace(/"/g,'&quot;')}" />`}
+      </div>`).join('');
     document.getElementById('modalBg').classList.add('open');
   };
 
-  // 모달 닫기
   window.closeModal = function() {
     document.getElementById('modalBg').classList.remove('open');
     currentDocId = null;
   };
 
-  // 수정 저장
   window.saveModal = async function() {
-    if (!currentDocId) return;
-    const fields = ['이름', '부서', '사번', '참여여부', '크루명', '유형', '활동기간',
-      '중간목표', '최종목표', '1~4주차', '5~8주차', '9~12주차', '교보재',
-      '총정원', '신규모집인원', '사전구성인원', '크루원요건', '소개글', '키워드'];
-
     const updated = {};
-    fields.forEach(f => {
+    FIELDS.forEach(f => {
       const el = document.getElementById('mf-' + f);
       if (el) updated[f] = el.value;
     });
-
-    const ref = doc(db, 'applications', currentDocId);
-    await updateDoc(ref, updated);
+    await updateDoc(doc(db,'applications',currentDocId), updated);
     alert('수정이 저장되었습니다!');
     closeModal();
     await loadData();
-    filterData(currentFilter, document.querySelector('.filter-btn.active'));
+    document.querySelector('.filter-btn.active').click();
   };
 
-  // CSV 다운로드
   window.exportCSV = function() {
-    if (allData.length === 0) { alert('다운로드할 데이터가 없습니다.'); return; }
-    const keys = ['신청일시','이름','부서','사번','참여여부','크루명','유형','활동기간',
-      '중간목표','최종목표','1~4주차','5~8주차','9~12주차','교보재',
-      '총정원','신규모집인원','사전구성인원','크루원요건','소개글','키워드','status'];
+    if (!allData.length) { alert('데이터가 없습니다.'); return; }
+    const keys = [...FIELDS, '신청일시', 'status'];
     const csv = [keys.join(','), ...allData.map(d =>
-      keys.map(k => `"${(d[k] || '').toString().replace(/"/g, '""')}"`).join(',')
+      keys.map(k => `"${(d[k]||'').toString().replace(/"/g,'""')}"`).join(',')
     )].join('\n');
-    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = '러닝크루_크루장신청_' + new Date().toLocaleDateString('ko-KR') + '.csv';
+    a.href = URL.createObjectURL(new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'}));
+    a.download = `러닝크루_신청현황_${new Date().toLocaleDateString('ko-KR')}.csv`;
     a.click();
   };
+
+  loadData();
 </script>
 </body>
 </html>
