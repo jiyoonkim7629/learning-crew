@@ -61,8 +61,19 @@
     .action-btns { display: flex; gap: 6px; }
     .btn-view { padding: 5px 12px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; font-weight: 600; cursor: pointer; background: white; font-family: 'Pretendard', sans-serif; }
     .btn-view:hover { border-color: var(--orange); color: var(--orange); }
-    .btn-approve { padding: 5px 12px; border-radius: 6px; border: none; font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Pretendard', sans-serif; background: var(--orange); color: white; }
-    .btn-approved { padding: 5px 12px; border-radius: 6px; border: 1px solid #1a9e5e; font-size: 12px; font-weight: 700; background: #eafaf3; color: #1a9e5e; cursor: default; }
+    .btn-approve {
+      padding: 5px 12px; border-radius: 6px; border: 1.5px solid #ddd;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      font-family: 'Pretendard', sans-serif;
+      background: white; color: #aaa;
+      transition: all 0.2s;
+    }
+    .btn-approve:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-pale); }
+    .btn-approved {
+      padding: 5px 12px; border-radius: 6px; border: none;
+      font-size: 12px; font-weight: 700; cursor: default;
+      background: var(--orange); color: white;
+    }
 
     .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; }
     .modal-bg.open { display: flex; }
@@ -227,16 +238,29 @@
   };
 
   window.saveModal = async function() {
-    const updated = {};
-    FIELDS.forEach(f => {
-      const el = document.getElementById('mf-' + f);
-      if (el) updated[f] = el.value;
-    });
-    await updateDoc(doc(db,'applications',currentDocId), updated);
-    alert('수정이 저장되었습니다!');
-    closeModal();
-    await loadData();
-    document.querySelector('.filter-btn.active').click();
+    if (!currentDocId) return;
+    const btn = document.querySelector('.modal-save');
+    btn.textContent = '저장 중...';
+    btn.disabled = true;
+    try {
+      const updated = {};
+      FIELDS.forEach(f => {
+        const el = document.getElementById('mf-' + f);
+        if (el) updated[f] = el.value;
+      });
+      await updateDoc(doc(db,'applications',currentDocId), updated);
+      // 로컬 데이터도 즉시 업데이트
+      const idx = allData.findIndex(x => x.id === currentDocId);
+      if (idx !== -1) allData[idx] = { ...allData[idx], ...updated };
+      alert('✅ 수정이 저장되었습니다!');
+      closeModal();
+      renderTable(currentFilter === '전체' ? allData : allData.filter(d => (d.status||'대기중') === currentFilter));
+    } catch(err) {
+      alert('저장 중 오류가 발생했습니다: ' + err.message);
+    } finally {
+      btn.textContent = '수정 저장';
+      btn.disabled = false;
+    }
   };
 
   window.exportCSV = function() {
