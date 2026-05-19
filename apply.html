@@ -295,33 +295,31 @@
         <label class="field-label">6. 스터디 커리큘럼 및 상세 활동 계획을 작성해 주세요. <span class="required">*</span></label>
         <div class="field-desc">활동 내용을 구체적으로 작성해 주세요. (강의 및 서적 진도, 프로젝트 진행 등) / 각 주차별 50자 이상</div>
         <div class="goal-field">
-          <span class="goal-label">1~3주차</span>
+          <span class="goal-label">1~4주차</span>
           <div style="flex:1;">
-            <textarea name="1~3주차" rows="3" placeholder="· 활동 내용을 개조식으로 작성해 주세요 (50자 이상)" minlength="50" required oninput="countChar(this)"></textarea>
-            <div class="char-count" id="count-1~3주차">0자</div>
+            <textarea name="1~4주차" rows="3" placeholder="주차별 활동 내용을 상세하게 작성해주세요 (50자 이상)" minlength="50" required oninput="countChar(this)"></textarea>
+            <div class="char-count" id="count-1~4주차">0자</div>
           </div>
         </div>
         <div class="goal-field">
-          <span class="goal-label">4~6주차</span>
+          <span class="goal-label">5~8주차</span>
           <div style="flex:1;">
-            <textarea name="4~6주차" rows="3" placeholder="· 활동 내용을 개조식으로 작성해 주세요 (50자 이상)" minlength="50" required oninput="countChar(this)"></textarea>
-            <div class="char-count" id="count-4~6주차">0자</div>
+            <textarea name="5~8주차" rows="3" placeholder="주차별 활동 내용을 상세하게 작성해주세요 (50자 이상)" minlength="50" required oninput="countChar(this)"></textarea>
+            <div class="char-count" id="count-5~8주차">0자</div>
           </div>
         </div>
         <div class="goal-field">
-          <span class="goal-label">7~9주차</span>
+          <span class="goal-label">9~12주차 <span style="font-size:11px; color:#aaa; font-weight:400;">(선택)</span></span>
           <div style="flex:1;">
-            <textarea name="7~9주차" rows="3" placeholder="· 활동 내용을 개조식으로 작성해 주세요 (50자 이상)" minlength="50" required oninput="countChar(this)"></textarea>
-            <div class="char-count" id="count-7~9주차">0자</div>
+            <textarea name="9~12주차" rows="3" placeholder="주차별 활동 내용을 상세하게 작성해주세요"></textarea>
+            <div class="char-count" id="count-9~12주차">0자</div>
           </div>
         </div>
-        <div class="goal-field">
-          <span class="goal-label">10~12주차</span>
-          <div style="flex:1;">
-            <textarea name="10~12주차" rows="3" placeholder="· 활동 내용을 개조식으로 작성해 주세요 (50자 이상)" minlength="50" required oninput="countChar(this)"></textarea>
-            <div class="char-count" id="count-10~12주차">0자</div>
-          </div>
-        </div>
+      </div>
+
+      <div class="field" style="margin-top: -12px;">
+        <label class="field-label"><span style="color:var(--orange);">교보재</span> <span style="font-size:12px; color:#aaa; font-weight:400;">(선택)</span></label>
+        <input type="text" name="교보재" placeholder="스터디에 활용 예정인 강의/서적이 있을 경우 기재해 주세요." />
       </div>
     </div>
 
@@ -347,7 +345,7 @@
           </div>
         </div>
         <div class="field-notice">
-          ※ 더 많은 구성원에게 학습 기회를 제공하기 위해 신규 멤버의 참여를 우선순위로 두고 있습니다. 크루장 신청이 많을 시, <strong style="color:#e53935;">신규 인원 비중이 높은 크루가 우선 선정</strong>될 수 있습니다.
+          ※ 더 많은 구성원에게 학습 기회를 제공하기 위해 <strong style="color:#e53935;">신규 멤버의 참여를 우선순위</strong>로 두고 있습니다. 크루장 신청이 많을 시, <strong style="color:#e53935;">신규 인원 비중이 높은 크루가 우선 선정</strong>될 수 있습니다.
         </div>
       </div>
 
@@ -371,7 +369,7 @@
 
       <div class="field">
         <label class="field-label">10. 스터디 핵심 키워드를 입력해 주세요. <span class="required">*</span></label>
-        <div class="field-desc">예: #업무자동화 #엑셀고급 #데이터분석 #생성형AI</div>
+        <div class="field-desc">2~3개 작성해 주세요. 예: #업무자동화 #엑셀고급 #데이터분석 #생성형AI</div>
         <input type="text" name="키워드" placeholder="#키워드1 #키워드2 #키워드3" required />
       </div>
     </div>
@@ -399,7 +397,7 @@
 
   const SCRIPT_URL = 'https://script.google.com/a/macros/oliveyoung.co.kr/s/AKfycbysSMHbHfaAZXPH5Mll9LSyF7ppoB_kWILQ4alcHLzRTyulUOobxNUD3sDZjzToGcy_oA/exec';
 
-  document.getElementById('applyForm').addEventListener('submit', async function(e) {
+  document.getElementById('applyForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     btn.textContent = '제출 중...';
@@ -419,21 +417,34 @@
     });
     data['신청일시'] = new Date().toLocaleString('ko-KR');
 
-    try {
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+    // hidden iframe으로 전송 (CORS 우회)
+    const iframe = document.createElement('iframe');
+    iframe.name = 'hidden_iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const hiddenForm = document.createElement('form');
+    hiddenForm.method = 'POST';
+    hiddenForm.action = SCRIPT_URL;
+    hiddenForm.target = 'hidden_iframe';
+    hiddenForm.style.display = 'none';
+
+    Object.keys(data).forEach(key => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = data[key];
+      hiddenForm.appendChild(input);
+    });
+
+    document.body.appendChild(hiddenForm);
+    hiddenForm.submit();
+
+    setTimeout(() => {
       form.style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
-      alert('제출 중 오류가 발생했습니다. 다시 시도해 주세요.');
-      btn.textContent = '신청서 제출하기 →';
-      btn.disabled = false;
-    }
+    }, 2000);
   });
 </script>
 </body>
