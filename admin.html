@@ -158,9 +158,16 @@
   let currentDocId = null;
 
   const FIELDS = ['이름','부서','사번','참여여부','크루명','유형','활동기간',
-    '중간목표','최종목표','1~4주차','5~8주차','9~12주차','교보재',
+    '중간목표','최종목표','1_4주차','5_8주차','9_12주차','교보재',
     '총정원','신규모집인원','사전구성인원','크루원요건','소개글','키워드'];
-  const TEXTAREA_FIELDS = ['중간목표','최종목표','1~4주차','5~8주차','9~12주차','크루원요건','소개글'];
+  const TEXTAREA_FIELDS = ['중간목표','최종목표','1_4주차','5_8주차','9_12주차','크루원요건','소개글'];
+  const FIELD_LABELS = {
+    '이름':'이름','부서':'부서','사번':'사번','참여여부':'참여여부','크루명':'크루명',
+    '유형':'유형','활동기간':'활동기간','중간목표':'중간목표','최종목표':'최종목표',
+    '1_4주차':'1~4주차','5_8주차':'5~8주차','9_12주차':'9~12주차','교보재':'교보재',
+    '총정원':'총정원','신규모집인원':'신규모집인원','사전구성인원':'사전구성인원',
+    '크루원요건':'크루원요건','소개글':'소개글','키워드':'키워드'
+  };
 
   async function loadData() {
     try {
@@ -219,7 +226,7 @@
     const d = allData.find(x => x.id === id);
     document.getElementById('modalFields').innerHTML = FIELDS.map(f => `
       <div class="modal-field">
-        <label class="modal-label">${f}</label>
+        <label class="modal-label">${FIELD_LABELS[f] || f}</label>
         ${f === '유형' ? `<select class="modal-input" id="mf-${f}">
           <option ${d[f]==='사이드프로젝트형'?'selected':''}>사이드프로젝트형</option>
           <option ${d[f]==='자격취득형'?'selected':''}>자격취득형</option>
